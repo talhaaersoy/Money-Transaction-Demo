@@ -7,9 +7,9 @@ namespace Entities.Concrete
 {
     public class Transaction :IEntity
     {
-        public Guid Id { get; set; }
-        public Guid SenderAccountNumber {get; set; }
-        public Guid RecieverAccountNumber { get; set; }
+        public int Id { get; set; }
+        public int SenderAccountNumber {get; set; }
+        public int ReceiverAccountNumber { get; set; }
         public decimal Amount { get; set; }
     }
 }

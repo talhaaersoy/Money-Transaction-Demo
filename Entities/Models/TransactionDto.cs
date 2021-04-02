@@ -6,8 +6,8 @@ namespace Entities.Models
 {
     public class TransactionDto
     {
-        public Guid SenderAccountNumber { get; set; }
-        public Guid ReceiverAccountNumber { get; set; }
+        public int SenderAccountNumber { get; set; }
+        public int ReceiverAccountNumber { get; set; }
         public decimal Amount { get; set; }
 
     }
