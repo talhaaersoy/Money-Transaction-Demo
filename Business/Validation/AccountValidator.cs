@@ -15,6 +15,9 @@ namespace Business.Validation
             RuleFor(x => x.CurrencyCode)
               .Must(x => currencyCodes.Contains(x)).WithMessage("Please only use those currency codes: " + String.Join(",", currencyCodes));
             RuleFor(x => x.Balance).ScalePrecision(2,10).WithMessage("Must be a precison of 2");
+            RuleFor(x => x.CurrencyCode).NotNull();
+            RuleFor(x => x.Balance).GreaterThan(0);
+            
         }
     }
 }

@@ -8,7 +8,15 @@ namespace Entities.Models.Response
     {
         public int ReferenceNumber { get; set; }
         public bool IsError { get; set; }
+        public string Message { get; set; }
 
+        public ResponseModel(int referenceNumber, bool isError,string message)
+        {
+            Message = message;
+            ReferenceNumber = referenceNumber;
+            IsError = isError;
+
+        }
         public ResponseModel(int referenceNumber,bool isError)
         {
             ReferenceNumber = referenceNumber;

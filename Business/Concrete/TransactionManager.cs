@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.Constants;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Models;
@@ -29,7 +30,7 @@ namespace Business.Concrete
         {
             var transaction = _mapper.Map<Transaction>(transactionDto);
             transaction.Id = Guid.NewGuid().GetHashCode();
-            IResponse result = BusinessRules.BusinessRules.Run(CheckBalance(transaction), CheckCurrencyCode(transaction));
+            IResponse result = BusinessRules.BusinessRules.Run(CheckCurrencyCode(transaction), CheckBalance(transaction));
             if (result != null)
             {
                 return result;
@@ -38,7 +39,7 @@ namespace Business.Concrete
             {
                 UpdateBalance(transaction);
                 _transaction.Add(transaction);
-                return new ResponseModel(transaction.Id, false);
+                return new ResponseModel(transaction.Id, false,Messages.SucceedTransaction);
             }
         }
         public ResponseDataModel<List<Transaction>> GetAll()
@@ -52,7 +53,7 @@ namespace Business.Concrete
             var amount = transaction.Amount;
             if (senderBalance<amount)
             {
-                return new ResponseModel(transaction.Id, true);
+                return new ResponseModel(transaction.Id, true,Messages.BalanceError);
             }
             return new ResponseModel(transaction.Id, false);
         }
@@ -64,7 +65,7 @@ namespace Business.Concrete
             {
                 return new ResponseModel(transaction.Id, false);
             }
-            return new ResponseModel(transaction.Id, true);
+            return new ResponseModel(transaction.Id, true,Messages.CurrencyCodeError);
         }
 
         public void UpdateBalance(Transaction transaction)

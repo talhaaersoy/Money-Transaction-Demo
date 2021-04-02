@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.Constants;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Models;
@@ -47,11 +48,11 @@ namespace Business.Concrete
                 account.Id = Guid.NewGuid().GetHashCode();
                 _accountDal.Add(account);
                 
-                return new ResponseModel(referenceNumber, false);
+                return new ResponseModel(referenceNumber, false,Messages.AccountCreated);
             }
             else
             {
-                return new ResponseModel(referenceNumber, true);
+                return new ResponseModel(referenceNumber, true,validateResult.Errors[0].ToString());
             }
 
            

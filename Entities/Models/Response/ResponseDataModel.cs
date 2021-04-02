@@ -7,7 +7,11 @@ namespace Entities.Models.Response
     public class ResponseDataModel<T> : ResponseModel
     {
         public T Data { get; set; }
-        public ResponseDataModel(T data,int referenceNumber, bool isError) : base(referenceNumber, isError)
+        public ResponseDataModel(T data, int referenceNumber, bool isError) : base(referenceNumber, isError)
+        {
+            Data = data;
+        }
+        public ResponseDataModel(T data,int referenceNumber, bool isError,string message) : base(referenceNumber, isError,message)
         {
             Data = data;
         }
